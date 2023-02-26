@@ -1,3 +1,6 @@
+import os.path
+
+from ellipse_generator.ellipse_dataset_generator import create_dataset
 from ellipse_generator.svg_ellipse import DemoEllipseInSVG, EllipseImageHandler
 
 
@@ -18,3 +21,10 @@ if __name__ == '__main__':
     svg_code = handler.warp_shapes_in_svg_header(svg_ellipses)
     with open('results/twenty_ellipses.svg', 'w') as f:
         f.write(svg_code)
+
+    N_train = 1e4
+    N_test = 200
+    for dataset in ['train', 'test']:
+        root = os.path.join('data', 'ellipses_dataset', 'eight_ellipses', dataset)
+        os.makedirs(root, exist_ok=True)
+        create_dataset(root, N_test if dataset == 'test' else N_train, num_ellipses=8)
