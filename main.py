@@ -1,4 +1,4 @@
-from ellipse_generator.single_ellipse_creator import DemoEllipseInSVG, EllipseImageHandler
+from ellipse_generator.svg_ellipse import DemoEllipseInSVG, EllipseImageHandler
 
 
 if __name__ == '__main__':

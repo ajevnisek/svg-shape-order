@@ -1,7 +1,7 @@
 <svg viewBox="-200 -200 600 600" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="94" cy="100" rx="164" ry="139" fill="#ECE5A0" opacity="0.5798095452527126"  transform="rotate(99 94 100)"/>
-  <ellipse cx="173" cy="60" rx="26" ry="110" fill="#53FDF2" opacity="0.6962620508126567"  transform="rotate(169 173 60)"/>
-  <ellipse cx="142" cy="87" rx="32" ry="44" fill="#B711A4" opacity="0.5124481136685013"  transform="rotate(16 142 87)"/>
-  <ellipse cx="105" cy="66" rx="81" ry="44" fill="#6D10DF" opacity="0.1988887446445153"  transform="rotate(168 105 66)"/>
-  <ellipse cx="164" cy="157" rx="29" ry="91" fill="#7A2E4C" opacity="0.7569439007666006"  transform="rotate(29 164 157)"/>
+  <ellipse cx="94" cy="100" rx="164" ry="139" fill="#ECE5A0" opacity="0.58"  transform="rotate(99 94 100)"/>
+  <ellipse cx="173" cy="60" rx="26" ry="110" fill="#53FDF2" opacity="0.70"  transform="rotate(169 173 60)"/>
+  <ellipse cx="142" cy="87" rx="32" ry="44" fill="#B711A4" opacity="0.51"  transform="rotate(16 142 87)"/>
+  <ellipse cx="105" cy="66" rx="81" ry="44" fill="#6D10DF" opacity="0.20"  transform="rotate(168 105 66)"/>
+  <ellipse cx="164" cy="157" rx="29" ry="91" fill="#7A2E4C" opacity="0.76"  transform="rotate(29 164 157)"/>
 </svg>

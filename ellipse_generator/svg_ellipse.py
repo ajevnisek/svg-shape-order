@@ -51,7 +51,7 @@ class Ellipse:
 
     def to_svg_line(self):
         svg_line = f'  <ellipse cx="{self.cx}" cy="{self.cy}" rx="{self.rx}" ry="{self.ry}" fill="{self.fill}" ' \
-                   f'opacity="{self.opacity}" '
+                   f'opacity="{self.opacity:.2f}" '
         svg_line += f' transform="rotate({self.angle} {self.cx} {self.cy})"/>\n'
         return svg_line
 
@@ -78,7 +78,7 @@ class DemoEllipseInSVG:
         min_x = min(-cx + rx, 0)
         min_y = min(-cy + ry, 0)
         svg_code = f'<svg viewBox="{min_x} {min_y} {width + abs(min_x)} {height + abs(min_y)}" xmlns="http://www.w3.org/2000/svg">\n'
-        svg_code += f'  <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="{fill}" opacity="{opacity}" '
+        svg_code += f'  <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="{fill}" opacity="{opacity:.2f}" '
         svg_code += f' transform="rotate({angle} {cx} {cy})"/>\n'
         svg_code += f'</svg>'
         return svg_code
