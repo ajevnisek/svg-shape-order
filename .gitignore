@@ -1,3 +1,7 @@
 
 *.pyc
 /data/
+/image_data/
+runs/
+results/
+.idea/

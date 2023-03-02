@@ -1,4 +1,5 @@
 import random
+import matplotlib
 import numpy as np
 
 
@@ -22,15 +23,24 @@ def hex_color_to_rgb(hex_color):
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
 
 
+def rgb_to_hex(rgb):
+    """
+    :param rgb:
+    :return:
+    """
+    return matplotlib.colors.to_hex([c/255.0 for c in rgb])
+
+
 class Ellipse:
     def __init__(self, cx, cy, rx, ry, angle, fill, opacity):
-        self.cx = cx
-        self.cy = cy
-        self.rx = rx
-        self.ry = ry
-        self.angle = angle
+        self.cx = int(cx)
+        self.cy = int(cy)
+        self.rx = int(rx)
+        self.ry = int(ry)
+        self.angle = int(angle)
         self.fill = fill
-        self.opacity = opacity
+        self.opacity = float(opacity)
+        self.rgb_color = hex_color_to_rgb(self.fill)
 
     @classmethod
     def from_svg_code(cls, svg_line: str):
@@ -46,7 +56,7 @@ class Ellipse:
         ry = svg_line.split('ry="')[-1].split('"')[0]
         fill = svg_line.split('fill="')[-1].split('"')[0]
         opacity = svg_line.split('opacity="')[-1].split('"')[0]
-        angle = svg_line.split('rotate("')[-1].split(' ')[0]
+        angle = svg_line.split('rotate(')[-1].split(' ')[0]
         return cls(cx, cy, rx, ry,angle, fill, opacity)
 
     def to_svg_line(self):
@@ -54,6 +64,21 @@ class Ellipse:
                    f'opacity="{self.opacity:.2f}" '
         svg_line += f' transform="rotate({self.angle} {self.cx} {self.cy})"/>\n'
         return svg_line
+
+    def __repr__(self):
+        return f"{__class__.__name__}(cx={self.cx}, cy={self.cy}, " \
+               f"rx={self.rx}, ry={self.ry}, fill={self.fill}, opacity=" \
+               f"{self.opacity}, angle={self.angle})"
+
+    def todict(self,):
+        return {'cx': self.cx, 'cy': self.cy, 'rx': self.rx, 'ry': self.ry,
+                'rgb_color': self.rgb_color, 'opacity': self.opacity,
+                'angle': self.angle, 'fill': self.fill}
+
+    @classmethod
+    def from_dict(cls, d):
+        return cls(d['cx'], d['cy'], d['rx'], d['ry'],
+                   d['angle'], d['fill'], d['opacity'])
 
 
 class DemoEllipseInSVG:
@@ -158,8 +183,14 @@ class EllipseImageHandler:
     def read_svg_file_and_get_ellipses(svg_file_path):
         with open(svg_file_path, 'r') as f:
             data = f.read()
-        ellipse_lines = [line for line in data.splitlines() if 'ellipse' in line]
+        return EllipseImageHandler.svg_code_to_ellipses_list(data)
+
+    @staticmethod
+    def svg_code_to_ellipses_list(svg_code):
+        ellipse_lines = [line for line in svg_code.splitlines() if
+                         'ellipse' in line]
         ellipses_list = []
         for ellipse_line in ellipse_lines:
             ellipses_list.append(Ellipse.from_svg_code(ellipse_line))
         return ellipses_list
+
