@@ -152,24 +152,21 @@ class EllipseImageHandler:
         :return: str. SVG code representing all ellipses.
         """
         cx_s = np.random.randint(20, 180, size=(n,))
-        cx_s.sort()
-        cx_s = cx_s[::-1]
         cy_s = np.random.randint(20, 180, size=(n,))
-        cy_s.sort()
-        cy_s = cy_s[::-1]
         rx_s = np.random.randint(20, 180, size=(n,))
-        rx_s.sort()
-        rx_s = rx_s[::-1]
         ry_s = np.random.randint(20, 180, size=(n,))
-        ry_s.sort()
-        ry_s = ry_s[::-1]
         fill_s = np.array([generate_randon_color() for _ in range(n)])
         angle_s = np.random.randint(0, 180, size=(n,))
         opacity_s = np.random.uniform(0.1, 1, size=(n,))
 
+        ellipses = []
+        for cx, cy, rx, ry, fill, angle, opacity in zip(cx_s, cy_s, rx_s, ry_s,
+                                                        fill_s, angle_s,
+                                                        opacity_s):
+            ellipses.append(Ellipse(cx, cy, rx, ry, angle, fill, opacity))
+        ellipses.sort(key=lambda x: x.rx * x.ry, reverse=True)
         svg_code = ''
-        for cx, cy, rx, ry, fill, angle, opacity in zip(cx_s, cy_s, rx_s, ry_s, fill_s, angle_s, opacity_s):
-            ellipse = Ellipse(cx, cy, rx, ry, angle, fill, opacity)
+        for ellipse in ellipses:
             svg_code += ellipse.to_svg_line()
         return svg_code
 
